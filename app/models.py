@@ -100,7 +100,8 @@ class SignIn(models.Model):
     def __str__(self):
         return self.email
     
-# Create a campaign table
+
+# Campaign model 
 
 class Campaign(models.Model):
 

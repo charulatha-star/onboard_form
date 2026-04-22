@@ -87,11 +87,32 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': BASE_DIR / 'db.sqlite3',
+     }
+ }
+ 
+
+
+
+'''
+DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'defaultdb',
+        'USER': 'avnadmin',
+        'PASSWORD': '<redacted>',
+        'HOST': 'mysql-40a2893-billiontags-7c07.h.aivencloud.com',
+        'PORT': '13250',
+        'OPTIONS': {
+            'ssl': {'ssl': {}},
+        }
     }
 }
+'''
+
+
 
 '''
 DATABASES = {
