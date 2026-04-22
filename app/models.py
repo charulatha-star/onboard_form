@@ -50,6 +50,23 @@ class Client(models.Model):
     topup_wallet_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     '''
 
+    # Add company contact fields
+        
+    contact_name = models.CharField(max_length=255, null=True, blank=True)
+    contact_phone = models.CharField(max_length=10, null=True, blank=True)
+    contact_email = models.EmailField(null=True, blank=True)
+
+    contact_designation = models.CharField(max_length=255, null=True, blank=True)
+    contact_country = models.CharField(max_length=100, null=True, blank=True)
+    contact_zipcode = models.CharField(max_length=20, null=True, blank=True)
+
+    contact_address = models.CharField(max_length=300, null=True, blank=True)
+
+    contact_signature = models.FileField(upload_to="signatures/",null=True,blank=True)
+
+    contact_is_active = models.BooleanField(default=True)
+
+
 
     def save(self, *args, **kwargs):
 
