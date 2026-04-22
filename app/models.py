@@ -66,6 +66,12 @@ class Client(models.Model):
 
     contact_is_active = models.BooleanField(default=True)
 
+    # Add company address fields
+    company_address_line1=models.CharField(max_length=300, null=True, blank=True)
+    company_address_line2=models.CharField(max_length=200, null=True, blank=True)
+    company_country = models.CharField(max_length=50,choices=COUNTRY, null=True, blank=True)
+    company_zipcode = models.CharField(max_length=10, null=True, blank=True)
+
 
 
     def save(self, *args, **kwargs):
@@ -84,3 +90,12 @@ class Client(models.Model):
 
     def __str__(self):
         return self.name
+    
+# Create a table for signin
+
+class SignIn(models.Model):
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.email

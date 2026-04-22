@@ -68,7 +68,6 @@ def add_client(request):
     return Response(serializer.errors, status=400)
 
 
-
 # API views function (Fetch)
 
 @api_view(['GET'])
@@ -78,3 +77,29 @@ def client_list(request):
     serializer = ClientSerializer(clients, many=True)
 
     return Response(serializer.data)
+
+
+# Signin logic
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import SignIn
+
+@api_view(['POST'])
+def signin(request):
+    
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    try:
+        user = SignIn.objects.get(email=email, password=password)
+
+        return Response({
+            "status": True,
+            "message": "Login Success",
+            "data": {"email": user.email}})
+
+    except SignIn.DoesNotExist:
+        return Response({
+            "status": False,
+            "message": "Invalid Credentials"})
