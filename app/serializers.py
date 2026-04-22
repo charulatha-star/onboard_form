@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Client, SignIn
+from .models import Client, SignIn, Campaign
 
 
 class ClientSerializer(serializers.ModelSerializer):
@@ -12,4 +12,10 @@ class ClientSerializer(serializers.ModelSerializer):
 class SignInSerializer(serializers.ModelSerializer):
     class Meta:
         model = SignIn
+        fields = '__all__'
+
+
+class CampaignSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Campaign
         fields = '__all__'

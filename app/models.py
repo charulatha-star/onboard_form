@@ -99,3 +99,52 @@ class SignIn(models.Model):
 
     def __str__(self):
         return self.email
+    
+# Create a campaign table
+
+class Campaign(models.Model):
+
+    STATUS = [('Draft','Draft'),('Live','Live'),('Paused','Paused'),('Completed','Completed'), ('Active', 'Active')]
+
+    # Campaign Info
+    campaign_id = models.CharField(max_length=20, unique=True, blank=True)
+    client_campaign_id = models.CharField(max_length=50, null=True, blank=True)
+
+    reporting_id = models.CharField(max_length=20, null=True, blank=True)
+    purchase_order_id = models.CharField(max_length=50, null=True, blank=True)
+
+    campaign_name = models.CharField(max_length=255)
+    client_name = models.CharField(max_length=255)
+
+    # Dates
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+    # Details
+    subagency = models.CharField(max_length=255, null=True, blank=True)
+    brand = models.CharField(max_length=255, null=True, blank=True)
+
+    website_url = models.URLField(null=True, blank=True)
+
+    status = models.CharField(max_length=20, choices=STATUS, default="Draft")
+
+    is_active = models.BooleanField(default=True)
+
+    #created_on = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+
+        if not self.campaign_id:
+            last = Campaign.objects.all().order_by('id').last()
+
+            if last:
+                last_id = int(last.campaign_id[4:])
+                self.campaign_id = f"CMP-{last_id + 1:04d}"
+            else:
+                self.campaign_id = "CMP-0001"
+
+        super().save(*args, **kwargs)
+
+
+    def __str__(self):
+        return self.campaign_name
