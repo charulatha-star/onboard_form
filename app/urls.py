@@ -9,6 +9,5 @@ urlpatterns = [
     path('client_list/', views.client_list, name='client_list'),
     path('signin/', views.signin, name='signin')
 
-
-
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
